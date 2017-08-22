@@ -1,5 +1,5 @@
 import { PixelRatio } from "react-native";
-
+import { Constants } from 'expo';
 import variable from "./../variables/platform";
 
 export default (variables = variable) => {
@@ -297,7 +297,7 @@ export default (variables = variable) => {
 		paddingTop: platform === "ios" ? 15 : 0,
 		borderBottomWidth: platform === "ios" ? 1 / PixelRatio.getPixelSizeForLayoutSize(1) : 0,
 		borderBottomColor: variables.toolbarDefaultBorder,
-		height: variables.toolbarHeight,
+		height: variables.toolbarHeight + Constants.statusBarHeight,
 		elevation: 3,
 		shadowColor: platformStyle === "material" ? "#000" : undefined,
 		shadowOffset: platformStyle === "material" ? { width: 0, height: 2 } : undefined,
@@ -306,6 +306,7 @@ export default (variables = variable) => {
 		top: 0,
 		left: 0,
 		right: 0,
+		paddingTop: Constants.statusBarHeight,
 	};
 
 	return headerTheme;

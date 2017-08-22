@@ -1,9 +1,9 @@
 const React = require("react-native");
-
 const { StyleSheet } = React;
+import colors from '../../native-base-theme/variables/material.js';
 
 export default styles = {
-  view: { height: 450, flex: 1, padding: 10 },
+  view: { height: 430, flex: 1 },
   image: {
     resizeMode: "cover",
     width: null,
@@ -23,7 +23,9 @@ export default styles = {
     alignItems: 'center'
   },
   buttonIconNoActive: {
-    color: '#000'
+    opacity: 0.3
+  },
+  fabButton: {
+    backgroundColor: colors.toolbarDefaultBg
   }
-
 };

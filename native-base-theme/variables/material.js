@@ -6,6 +6,7 @@ const deviceHeight = Dimensions.get("window").height;
 const deviceWidth = Dimensions.get("window").width;
 const platform = Platform.OS;
 const platformStyle = "material";
+const colorApp = "#B71C1C";
 
 export default {
   platformStyle,
@@ -108,7 +109,7 @@ export default {
   cardDefaultBg: "#fff",
 
   // Color
-  brandPrimary: "#3F51B5",
+  brandPrimary: "#03A9F4", //colorApp
   brandInfo: "#3F57D3",
   brandSuccess: "#5cb85c",
   brandDanger: "#d9534f",
@@ -131,10 +132,10 @@ export default {
 
   // Footer
   footerHeight: 55,
-  footerDefaultBg: "#3F51B5",
+  footerDefaultBg: colorApp,
 
   // FooterTab
-  tabBarTextColor: "#b3c7f9",
+  tabBarTextColor: "rgba(255, 255, 255, 0.6)",
   tabBarTextSize: platform === "ios" ? 14 : 11,
   activeTab: "#fff",
   sTabBarActiveTextColor: "#007aff",
@@ -151,7 +152,7 @@ export default {
 
   // Header
   toolbarBtnColor: "#fff",
-  toolbarDefaultBg: "#B71C1C",
+  toolbarDefaultBg: colorApp,
   toolbarHeight: platform === "ios" ? 76 : 56,
   toolbarIconSize: platform === "ios" ? 20 : 22,
   toolbarSearchIconSize: platform === "ios" ? 20 : 23,
@@ -159,7 +160,7 @@ export default {
   searchBarHeight: platform === "ios" ? 30 : 40,
   toolbarInverseBg: "#222",
   toolbarTextColor: "#fff",
-  toolbarDefaultBorder: "#B71C1C",
+  toolbarDefaultBorder: colorApp,
   iosStatusbar: "light-content",
   get statusBarColor() {
     return color(this.toolbarDefaultBg).darken(0.2).hex();
