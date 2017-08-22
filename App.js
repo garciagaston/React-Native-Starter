@@ -1,5 +1,8 @@
 import React from "react";
 import Expo from 'expo';
+import { StyleProvider } from 'native-base';
+import getTheme from './native-base-theme/components';
+import material from './native-base-theme/variables/material';
 
 import HomeScreen from "./src/HomeScreenRouter.js";
 
@@ -24,7 +27,9 @@ export default class App extends React.Component {
       return <Expo.AppLoading />;
     }
     return (
-      <HomeScreen />
+      <StyleProvider style={getTheme(material)}>
+        <HomeScreen />
+      </StyleProvider>
     );
    }
 }
