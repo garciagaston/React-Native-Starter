@@ -18,7 +18,7 @@ import {
   Icon,
   Fab,
   Footer,
-  FooterTab,
+  FooterTab
 } from "native-base";
 import IconF from 'react-native-vector-icons/SimpleLineIcons';
 import _ from 'lodash';
@@ -37,7 +37,7 @@ export default class HomeScreen extends React.Component {
       likes: [],
       dislikes: [],
       showAddQuotes: false,
-      showSwipeLeft: false,
+      showSwipeLeft: false
     };
   }
 
@@ -80,75 +80,72 @@ export default class HomeScreen extends React.Component {
         <Content padder>
 
           <View style={styles.view}>
-            <DeckSwiper ref={(mr) => this._deckSwiper = mr} dataSource={cards} looping={true} renderItem={item => <Card style={{
-              elevation: 3
-            }}>
-              <CardItem>
-                <Left>
-                  <Body>
-                    <Text>{item.category}</Text>
-                  </Body>
-                </Left>
-              </CardItem>
-              <CardItem cardBody>
-                <Image style={styles.image} source={item.image}>
-                  <Text style={styles.quote}>{item.quote}</Text>
-                </Image>
-              </CardItem>
-              <CardItem>
-                <Left>
-                  <Button active={this.state.likes.indexOf(item.id) > -1} transparent primary onPress={() => this._like(item)}>
-                    <Icon name="thumbs-up" style={[
-                      this.state.likes.indexOf(item.id) == -1 && styles.buttonIconNoActive,
-                      styles.likeIcon
-                    ]}/>
-                  </Button>
-                  <Button active={this.state.dislikes.indexOf(item.id) > -1} transparent primary onPress={() => this._dislike(item)}>
-                    <Icon name="thumbs-down" style={[
-                      this.state.dislikes.indexOf(item.id) == -1 && styles.buttonIconNoActive,
-                      styles.likeIcon
-                    ]}/>
-                  </Button>
-                </Left>
-                <Right>
-                <Button primary onPress={() => this._deckSwiper._root.swipeRight()}>
-                  <Text>Siguiente</Text>
-                  <Icon name="arrow-forward"/>
-                </Button>
-                </Right>
-              </CardItem>
-            </Card>}/>
-          </View>
-
-          <View>
-          <Button transparent primary style={[{alignSelf: "center"}, styles.buttonIcon]} onPress={() => this._share(item.quote)}>
-            <Icon active name="share" style={styles.likeIcon}/>
-            <Text>Compartir</Text>
-          </Button>
-
+            <DeckSwiper ref={(mr) => this._deckSwiper = mr} dataSource={cards} looping={true} renderItem={item => <View>
+              <Card style={{
+                elevation: 3
+              }}>
+                <CardItem>
+                  <Left>
+                    <Body>
+                      <Text>{item.category}</Text>
+                    </Body>
+                  </Left>
+                </CardItem>
+                <CardItem cardBody>
+                  <Image style={styles.image} source={item.image}>
+                    <Text style={styles.quote}>{item.quote}</Text>
+                  </Image>
+                </CardItem>
+                <CardItem>
+                  <Left>
+                    <Button active={this.state.likes.indexOf(item.id) > -1} transparent primary onPress={() => this._like(item)}>
+                      <Icon name="thumbs-up" style={[
+                        this.state.likes.indexOf(item.id) == -1 && styles.buttonIconNoActive,
+                        styles.likeIcon
+                      ]}/>
+                    </Button>
+                    <Button active={this.state.dislikes.indexOf(item.id) > -1} transparent primary onPress={() => this._dislike(item)}>
+                      <Icon name="thumbs-down" style={[
+                        this.state.dislikes.indexOf(item.id) == -1 && styles.buttonIconNoActive,
+                        styles.likeIcon
+                      ]}/>
+                    </Button>
+                  </Left>
+                  <Right>
+                    <Button transparent primary onPress={() => this._deckSwiper._root.swipeRight()}>
+                      <Text>Siguiente</Text>
+                      <Icon name="arrow-forward"/>
+                    </Button>
+                  </Right>
+                </CardItem>
+              </Card>
+              <Button primary style={ styles.buttonShare } onPress={() => this._share(item.quote)}>
+                <Icon active name="share" style={styles.likeIcon}/>
+                <Text>Compartir</Text>
+              </Button>
+            </View>}/>
           </View>
         </Content>
-        {this.state.showAddQuotes > 0 &&
-        <Fab direction="up" position="bottomRight" style={ styles.fabButton }>
+        {this.state.showAddQuotes > 0 && <Fab direction="up" position="bottomRight" style={styles.fabButton}>
           <Icon name="md-add"/>
         </Fab>
-        }
+}
         <Footer>
           <FooterTab>
             <Button active vertical>
-              <Icon active name="apps" />
+              <Icon active name="apps"/>
               <Text>Todas</Text>
             </Button>
             <Button vertical>
-              <Icon name="camera" />
+              <Icon name="camera"/>
               <Text>Frases 1</Text>
             </Button>
             <Button vertical>
-              <Icon name="navigate" />
+              <Icon name="navigate"/>
               <Text>Frases 2</Text>
             </Button>
             <Button vertical>
-              <Icon name="person" />
+              <Icon name="person"/>
               <Text>Favoritas</Text>
             </Button>
           </FooterTab>

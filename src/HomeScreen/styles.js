@@ -3,7 +3,7 @@ const { StyleSheet } = React;
 import colors from '../../native-base-theme/variables/material.js';
 
 export default styles = {
-  view: { height: 430, flex: 1 },
+  view: { height: 510, flex: 1 },
   image: {
     resizeMode: "cover",
     width: null,
@@ -19,8 +19,9 @@ export default styles = {
   likeIcon: {
     fontSize: 32
   },
-  buttonIcon: {
-    alignItems: 'center'
+  buttonShare: {
+    alignSelf: "center",
+    marginTop: 30
   },
   buttonIconNoActive: {
     opacity: 0.3
