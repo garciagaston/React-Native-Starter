@@ -135,10 +135,6 @@ export default class HomeScreen extends React.Component {
           </View>
         </Content>
 
-        {this.state.showAddQuotes > 0 && <Fab direction="up" position="bottomRight" style={styles.fabButton}>
-          <Icon name="md-add"/>
-        </Fab>}
-
         <Footer>
           <FooterTab>
             <Button active vertical>
@@ -163,6 +159,7 @@ export default class HomeScreen extends React.Component {
     );
   }
 }
+
 HomeScreen.navigationOptions = ({navigation}) => ({header: (
     <Header>
       <Left>
@@ -174,6 +171,9 @@ HomeScreen.navigationOptions = ({navigation}) => ({header: (
         <Title>HomeScreen</Title>
       </Body>
       <Right>
+        <Button rounded transparent onPress={() => navigation.navigate("AddQuote")}>
+          <Icon name="md-add-circle"/>
+        </Button>
         <Button rounded transparent onPress={() => navigation.navigate("AboutUs")}>
           <Icon name="md-information-circle"/>
         </Button>
