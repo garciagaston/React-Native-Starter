@@ -20,8 +20,7 @@ export default styles = {
     fontSize: 32
   },
   buttonShare: {
-    alignSelf: "center",
-    marginTop: 30
+    //alignSelf: "center",
   },
   buttonIconNoActive: {
     opacity: 0.3

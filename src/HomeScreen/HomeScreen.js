@@ -90,6 +90,12 @@ export default class HomeScreen extends React.Component {
                       <Text>{item.category}</Text>
                     </Body>
                   </Left>
+                  <Right>
+                  <Button transparent primary onPress={() => this._deckSwiper._root.swipeRight()}>
+                    <Text style={{paddingRight: 5}}>Siguiente</Text>
+                    <Icon name="ios-arrow-forward-outline"/>
+                  </Button>
+                  </Right>
                 </CardItem>
                 <CardItem cardBody>
                   <Image style={styles.image} source={item.image}>
@@ -112,17 +118,14 @@ export default class HomeScreen extends React.Component {
                     </Button>
                   </Left>
                   <Right>
-                    <Button transparent primary onPress={() => this._deckSwiper._root.swipeRight()}>
-                      <Text>Siguiente</Text>
-                      <Icon name="arrow-forward"/>
-                    </Button>
+                  <Button primary style={styles.buttonShare} onPress={() => this._share(item.quote)}>
+                    <Icon active name="share" style={styles.likeIcon}/>
+                    <Text>Compartir</Text>
+                  </Button>
+
                   </Right>
                 </CardItem>
               </Card>
-              <Button primary style={ styles.buttonShare } onPress={() => this._share(item.quote)}>
-                <Icon active name="share" style={styles.likeIcon}/>
-                <Text>Compartir</Text>
-              </Button>
             </View>}/>
           </View>
         </Content>
@@ -146,7 +149,7 @@ export default class HomeScreen extends React.Component {
             </Button>
             <Button vertical>
               <Icon name="person"/>
-              <Text>Favoritas</Text>
+              <Text>Frases 3</Text>
             </Button>
           </FooterTab>
         </Footer>
