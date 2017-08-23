@@ -14,7 +14,9 @@ export default styles = {
   },
   quote: {
     textAlign: 'center',
-    color: '#fff'
+    color: '#fff',
+    fontSize: 26,
+    padding: 20
   },
   likeIcon: {
     fontSize: 32

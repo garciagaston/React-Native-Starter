@@ -22,12 +22,18 @@ import {
 } from "native-base";
 import IconF from 'react-native-vector-icons/SimpleLineIcons';
 import _ from 'lodash';
-//import { StackNavigator } from "react-navigation";
 
 import styles from "./styles";
 import cards from "./data";
-//import EditScreenOne from "./EditScreenOne.js";
-//import EditScreenTwo from "./EditScreenTwo.js";
+
+const background = [
+  require('../../img/swiper-1.png'),
+  require('../../img/swiper-2.png'),
+  require('../../img/swiper-3.png'),
+  require('../../img/swiper-4.png')
+]
+
+const fonts = ['Cabin-Regular', 'Cabin-Bold', 'Cabin-Italic', 'Inconsolata-Regular', 'Inconsolata-Bold', 'Nunito-Bold', 'Nunito-Regular', 'NunitoSans-Bold', 'NunitoSans-Italic', 'Pacifico-Regular', 'Quicksand-Light', 'Quicksand-Regular', 'Rubik-Italic', 'Rubik-Regular'];
 
 export default class HomeScreen extends React.Component {
 
@@ -36,8 +42,7 @@ export default class HomeScreen extends React.Component {
     this.state = {
       likes: [],
       dislikes: [],
-      showAddQuotes: false,
-      showSwipeLeft: false
+      showAddQuotes: false
     };
   }
 
@@ -98,8 +103,8 @@ export default class HomeScreen extends React.Component {
                   </Right>
                 </CardItem>
                 <CardItem cardBody>
-                  <Image style={styles.image} source={item.image}>
-                    <Text style={styles.quote}>{item.quote}</Text>
+                  <Image style={styles.image} source={background[item.image]}>
+                    <Text style={[styles.quote, {'fontFamily': fonts[item.font]}]}>"{item.quote}"</Text>
                   </Image>
                 </CardItem>
                 <CardItem>
@@ -129,10 +134,11 @@ export default class HomeScreen extends React.Component {
             </View>}/>
           </View>
         </Content>
+
         {this.state.showAddQuotes > 0 && <Fab direction="up" position="bottomRight" style={styles.fabButton}>
           <Icon name="md-add"/>
-        </Fab>
-}
+        </Fab>}
+
         <Footer>
           <FooterTab>
             <Button active vertical>
@@ -167,6 +173,13 @@ HomeScreen.navigationOptions = ({navigation}) => ({header: (
       <Body>
         <Title>HomeScreen</Title>
       </Body>
-      <Right/>
+      <Right>
+        <Button rounded transparent onPress={() => navigation.navigate("AboutUs")}>
+          <Icon name="md-information-circle"/>
+        </Button>
+        <Button rounded transparent onPress={() => navigation.navigate("Favorites")}>
+          <Icon name="heart"/>
+        </Button>
+      </Right>
     </Header>
   )});

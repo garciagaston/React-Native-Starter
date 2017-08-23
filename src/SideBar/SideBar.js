@@ -7,17 +7,49 @@ import {
   List,
   ListItem,
   Content,
-  Icon
+  Icon,
+  View
 } from "native-base";
-const routes = ["Home", "Profile"];
+import { Constants } from 'expo';
+import material from '../../native-base-theme/variables/material';
+
+const routes = [
+  {
+    title: 'Inicio',
+    icon: 'md-home',
+    destination: 'Home'
+  },
+  {
+    title: 'Favoritos',
+    icon: 'heart',
+    destination: 'Favorites'
+  },
+  {
+    title: 'Agregar frase',
+    icon: 'md-add-circle',
+    destination: 'AddQuote'
+  },
+  {
+    title: 'Ayuda',
+    icon: 'md-information-circle',
+    destination: 'Help'
+  },
+  {
+    title: 'Sobre la app',
+    icon: 'md-appstore',
+    destination: 'AboutUs'
+  }
+];
+
 export default class SideBar extends React.Component {
   render() {
     return (
       <Container>
         <Content>
+          <View style={{ height: Constants.statusBarHeight, backgroundColor: material.brandSidebar}} />
           <Image
             source={{
-              uri: "https://github.com/GeekyAnts/NativeBase-KitchenSink/raw/react-navigation/img/drawer-cover.png"
+              uri: "https://github.com/GeekyAnts/NativeBase-KitchenSink/raw/master/img/drawer-cover.png"
             }}
             style={{
               height: 120,
@@ -30,7 +62,7 @@ export default class SideBar extends React.Component {
               square
               style={{ height: 80, width: 70 }}
               source={{
-                uri: "https://github.com/GeekyAnts/NativeBase-KitchenSink/raw/react-navigation/img/logo.png"
+                uri: "https://github.com/GeekyAnts/NativeBase-KitchenSink/raw/master/img/logo.png"
               }}
             />
           </Image>
@@ -40,9 +72,10 @@ export default class SideBar extends React.Component {
               return (
                 <ListItem
                   button
-                  onPress={() => this.props.navigation.navigate(data)}
+                  onPress={() => this.props.navigation.navigate(data.destination)}
                 >
-                  <Text>{data}</Text>
+                  <Icon active name={data.icon} style={{ color: "#777", fontSize: 26, width: 30 }} />
+                  <Text>{data.title}</Text>
                 </ListItem>
               );
             }}
