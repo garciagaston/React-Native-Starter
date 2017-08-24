@@ -1,5 +1,5 @@
 import React from "react";
-import {Image, View, Share} from "react-native";
+import {Image, View, Share, AsyncStorage} from "react-native";
 import {
   Text,
   Container,
@@ -12,7 +12,8 @@ import {
   Left,
   Right,
   Button,
-  Icon
+  Icon,
+  Spinner
 } from "native-base";
 
 import _ from 'lodash';
@@ -27,11 +28,53 @@ export default class QuoteDeckSwiper extends React.Component {
     super();
     this.state = {
       likes: [],
-      dislikes: []
+      dislikes: [],
+      quotes: []
     };
   }
 
-  _like(card) {
+  componentDidMount () {
+    this._getQuotesStorage();
+    this._getLikesStorage();
+    this._getDislikesStorage();
+  }
+
+  async _getQuotesStorage() {
+    let response = await AsyncStorage.getItem('quotes');
+    let quotes = await JSON.parse(response) || [];
+    if (quotes.length) {
+      this.setState({
+        quotes
+      });
+    } else {
+      this.setState({
+        quotes: cards
+      });
+      await AsyncStorage.setItem('quotes', JSON.stringify(cards));
+    }
+  }
+
+  async _getLikesStorage() {
+    let response = await AsyncStorage.getItem('likes');
+    let likes = await JSON.parse(response) || [];
+    if (likes.length) {
+      this.setState({
+        likes
+      });
+    }
+  }
+
+  async _getDislikesStorage() {
+    let response = await AsyncStorage.getItem('dislikes');
+    let dislikes = await JSON.parse(response) || [];
+    if (dislikes.length) {
+      this.setState({
+        dislikes
+      });
+    }
+  }
+
+  async _like(card) {
     var likes = this.state.likes;
     if (likes.indexOf(card.id) == -1) {
       likes.push(card.id);
@@ -39,10 +82,13 @@ export default class QuoteDeckSwiper extends React.Component {
       likes = _.pull(likes, card.id);
     }
     var dislikes = _.pull(this.state.dislikes, card.id);
-    this.setState({likes: likes, dislikes: dislikes})
+    this.setState({likes: likes, dislikes: dislikes});
+    await AsyncStorage.setItem('likes', JSON.stringify(likes));
+    await AsyncStorage.setItem('dislikes', JSON.stringify(dislikes));
+    await AsyncStorage.setItem('likedQuotes', '[]');
   }
 
-  _dislike(card) {
+  async _dislike(card) {
     var dislikes = this.state.dislikes;
     if (dislikes.indexOf(card.id) == -1) {
       dislikes.push(card.id);
@@ -50,7 +96,10 @@ export default class QuoteDeckSwiper extends React.Component {
       dislikes = _.pull(dislikes, card.id);
     }
     var likes = _.pull(this.state.likes, card.id);
-    this.setState({like: likes, dislikes: dislikes})
+    this.setState({like: likes, dislikes: dislikes});
+    await AsyncStorage.setItem('likes', JSON.stringify(likes));
+    await AsyncStorage.setItem('dislikes', JSON.stringify(dislikes));
+    await AsyncStorage.setItem('likedQuotes', '[]');
   }
 
   _share(quote) {
@@ -66,8 +115,11 @@ export default class QuoteDeckSwiper extends React.Component {
 
   render() {
       return (
+
         <View style={styles.view}>
-          <DeckSwiper ref={(mr) => this._deckSwiper = mr} dataSource={cards} looping={true} renderItem={item => <View>
+        {
+          this.state.quotes.length
+          ? <DeckSwiper ref={(mr) => this._deckSwiper = mr} dataSource={this.state.quotes} looping={true} renderItem={item => <View>
             <Card style={{
               elevation: 3
             }}>
@@ -120,6 +172,8 @@ export default class QuoteDeckSwiper extends React.Component {
             </Card>
           </View>
         }/>
+        : <Spinner color='red' />
+      }
       </View>
     )
   }
