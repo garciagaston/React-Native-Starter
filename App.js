@@ -4,7 +4,7 @@ import { StyleProvider } from 'native-base';
 import getTheme from './native-base-theme/components';
 import material from './native-base-theme/variables/material';
 
-import HomeScreen from "./src/HomeScreenRouter.js";
+import Router from "./src/Router";
 
 export default class App extends React.Component {
   constructor() {
@@ -43,7 +43,7 @@ export default class App extends React.Component {
     }
     return (
       <StyleProvider style={getTheme(material)}>
-        <HomeScreen />
+        <Router />
       </StyleProvider>
     );
    }

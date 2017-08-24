@@ -4,7 +4,11 @@ const Config = {
   showHelp: true,
   showAboutUs: true,
   fonts: ['Cabin-Regular', 'Cabin-Bold', 'Cabin-Italic', 'Inconsolata-Regular', 'Inconsolata-Bold', 'Nunito-Bold', 'Nunito-Regular', 'NunitoSans-Bold', 'NunitoSans-Italic', 'Pacifico-Regular', 'Quicksand-Light', 'Quicksand-Regular', 'Rubik-Italic', 'Rubik-Regular'],
-  categories: [{title: 'Frases 1', icon: ''}, {title: 'Frases 2', icon: ''}, {title: 'Frases 3', icon: ''}],
+  categories: [
+    {title: 'Frases 1', icon: 'md-glasses'},
+    {title: 'Frases 2', icon: 'md-happy'},
+    {title: 'Frases 3', icon: 'md-hand'},
+  ],
   routes: [
     {
       title: 'Inicio',
