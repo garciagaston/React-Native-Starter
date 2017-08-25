@@ -7,7 +7,7 @@ const deviceWidth = Dimensions.get("window").width;
 const platform = Platform.OS;
 const platformStyle = "material";
 const colorApp = "#B71C1C";
-
+const textOpacity = "rgba(255, 255, 255, 0.6)"
 export default {
   platformStyle,
   platform,
@@ -135,7 +135,7 @@ export default {
   footerDefaultBg: colorApp,
 
   // FooterTab
-  tabBarTextColor: "rgba(255, 255, 255, 0.6)",
+  tabBarTextColor: textOpacity,
   tabBarTextSize: platform === "ios" ? 14 : 11,
   activeTab: "#fff",
   sTabBarActiveTextColor: "#007aff",
@@ -143,8 +143,8 @@ export default {
   tabActiveBgColor: undefined,
 
   // Tab
-  tabDefaultBg: "#3F51B5",
-  topTabBarTextColor: "#b3c7f9",
+  tabDefaultBg: colorApp,
+  topTabBarTextColor: textOpacity,
   topTabBarActiveTextColor: "#fff",
   topTabActiveBgColor: undefined,
   topTabBarBorderColor: "#fff",

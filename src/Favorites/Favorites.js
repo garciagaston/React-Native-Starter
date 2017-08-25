@@ -75,7 +75,7 @@ export default class Favorites extends React.Component {
                   <Card>
                     <CardItem>
                       <Body>
-                        <Text>{item.quote}</Text>
+                        <Text>"{item.quote}"</Text>
                       </Body>
                     </CardItem>
                     <CardItem>
@@ -93,6 +93,7 @@ export default class Favorites extends React.Component {
                       <Right>
                         <Button transparent>
                           <Icon name="share" />
+                          <Text> Compartir</Text>
                         </Button>
                       </Right>
                     </CardItem>

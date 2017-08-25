@@ -13,7 +13,8 @@ import {
   Right,
   Button,
   Icon,
-  Spinner
+  Spinner,
+  Toast
 } from "native-base";
 
 import _ from 'lodash';
@@ -42,6 +43,7 @@ export default class QuoteDeckSwiper extends React.Component {
   async _getQuotesStorage() {
     let response = await AsyncStorage.getItem('quotes');
     let quotes = await JSON.parse(response) || [];
+    quotes = [];
     if (quotes.length) {
       this.setState({
         quotes
@@ -50,7 +52,14 @@ export default class QuoteDeckSwiper extends React.Component {
       this.setState({
         quotes: cards
       });
-      await AsyncStorage.setItem('quotes', JSON.stringify(cards));
+      await AsyncStorage.setItem('quotes', JSON.stringify(cards)).then(res => {
+        /*Toast.show({
+          text: 'Listado de frases actualizado.',
+          position: 'bottom',
+          buttonText: 'Okay',
+          duration: 1000
+        });*/
+      });
     }
   }
 

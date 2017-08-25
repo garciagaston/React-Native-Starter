@@ -10,11 +10,15 @@ import {
   Right,
   Title,
   Button,
-  Icon
+  Icon,
+  Tab,
+  Tabs,
+  TabHeading
 } from "native-base";
 
 import styles from "./styles";
 import QuoteDeckSwiper from "./QuoteDeckSwiper";
+import QuoteList from "./QuoteList"
 import FooterHome from "./FooterHome";
 import Config from "../config";
 
@@ -24,9 +28,20 @@ export default class Home extends React.Component {
 
     return (
       <Container>
-        <Content padder>
+      <Tabs locked={true}>
+        <Tab heading={ <TabHeading><Icon name="md-images" /><Text>Frases</Text></TabHeading>}>
+          <Content padder>
             <QuoteDeckSwiper />
-        </Content>
+          </Content>
+
+        </Tab>
+        <Tab heading={ <TabHeading><Text>Listado</Text></TabHeading>}>
+          <Content padder>
+            <QuoteList />
+          </Content>
+        </Tab>
+      </Tabs>
+
         <FooterHome />
       </Container>
     );
@@ -34,7 +49,7 @@ export default class Home extends React.Component {
 }
 
 Home.navigationOptions = ({navigation}) => ({header: (
-    <Header>
+    <Header hasTabs>
       <Left>
         <Button transparent onPress={() => navigation.navigate("DrawerOpen")}>
           <Icon name="menu"/>

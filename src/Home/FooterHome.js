@@ -24,7 +24,7 @@ export default class FooterHome extends React.Component {
       <Footer>
         <FooterTab>
           <Button active vertical>
-            <Icon name="md-images"/>
+            <Icon name="md-albums"/>
             <Text>Todas</Text>
           </Button>
           { footerButtons }
