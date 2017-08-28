@@ -1,5 +1,5 @@
 import React from "react";
-import {AsyncStorage, ListView, TouchableHighlight} from "react-native";
+import {AsyncStorage, ListView, TouchableHighlight, Image} from "react-native";
 import {
   Text,
   Container,
@@ -17,9 +17,10 @@ import {
   View
 } from "native-base";
 
-import _ from 'lodash';
-import styles from "../Home/styles";
-import QuoteListModal from "./QuoteListModal";
+import { Col, Row, Grid } from 'react-native-easy-grid';
+import styles from "./QuoteList.style.js";
+import Config from "../config.js";
+const background = [require('../../img/swiper-1.png'), require('../../img/swiper-2.png'), require('../../img/swiper-3.png'), require('../../img/swiper-4.png'), require('../../img/swiper-4.png')]
 
 export default class QuoteList extends React.Component {
 
@@ -32,12 +33,8 @@ export default class QuoteList extends React.Component {
       likes: [],
       dislikes: [],
       quotes: [],
-      selectedQuote: {},
-      showModal: false,
-      loadingModal: false,
       loading: true
     };
-    this._showModal = this._showModal.bind(this);
   }
 
   componentDidMount () {
@@ -62,13 +59,6 @@ export default class QuoteList extends React.Component {
     });
   }
 
-  _showModal(show = false, quote = {}) {
-    this.setState({
-      'showModal': show,
-      'selectedQuote': quote
-    });
-  }
-
   render() {
     let dataSource = this.state.ds.cloneWithRows(this.state.quotes);
     return (
@@ -83,42 +73,31 @@ export default class QuoteList extends React.Component {
                     enableEmptySections={ true }
                     renderRow={(item) =>
                       <TouchableHighlight onPress={() => {
-                        this._showModal(true, item);
+                        this.props.navigation.navigate("QuotePage", {quote: item})
                       }}>
                         <Card>
-                          <CardItem>
-                            <Body>
-                              <Text>"{item.quote}"</Text>
-                            </Body>
-                          </CardItem>
-                          <CardItem>
-                            <Left>
-                              <Button transparent>
-                                <Icon name="thumbs-up" />
-                              </Button>
-                              <Button transparent style={
-                                styles.buttonIconNoActive
-                              }>
-                                <Icon name="thumbs-down" />
-                              </Button>
-                            </Left>
-                            <Body />
-                            <Right>
-                              <Button transparent>
-                                <Icon name="share" />
-                                <Text> Compartir</Text>
-                              </Button>
-                            </Right>
+                          <CardItem cardBody>
+                            <Image style={styles.imagePreview} source={background[item.image]}>
+                              <Grid>
+                                <Col size={10}>
+                                  <View style={styles.gridPreview}>
+                                    <Text style={ styles.fontPreview }>
+                                        "{item.quote.substring(0, Config.lengthQuotePreview)}..."
+                                    </Text>
+                                  </View>
+                                </Col>
+                                <Col size={2}>
+                                  <View style={styles.gridPreview}>
+                                    <Icon name="md-more" style={styles.iconButtonPreview} />
+                                  </View>
+                                </Col>
+                              </Grid>
+                            </Image>
                           </CardItem>
                         </Card>
                       </TouchableHighlight>
                     }
                   />
-                  {
-                    this.state.showModal &&
-                    <QuoteListModal quote={this.state.selectedQuote} showModal={this._showModal}/>
-                  }
-
                 </View>
           }
       </View>

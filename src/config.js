@@ -35,6 +35,7 @@ const Config = {
       icon: 'md-appstore',
       destination: 'AboutUs'
     }
-  ]
+  ],
+  lengthQuotePreview: 45
 };
 export default Config;

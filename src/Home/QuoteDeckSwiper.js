@@ -25,17 +25,20 @@ const background = [require('../../img/swiper-1.png'), require('../../img/swiper
 
 export default class QuoteDeckSwiper extends React.Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       likes: [],
       dislikes: [],
-      quotes: []
+      showClose: props.navigation,
+      quotes: props.quote ? [props.quote] : []
     };
   }
 
   componentDidMount () {
-    this._getQuotesStorage();
+    if (!this.props.quote){
+      this._getQuotesStorage();
+    }
     this._getLikesStorage();
     this._getDislikesStorage();
   }
@@ -123,6 +126,7 @@ export default class QuoteDeckSwiper extends React.Component {
   }
 
   render() {
+    console.log('quote:', this.props.quote);
       return (
 
         <View style={styles.view}>
@@ -139,12 +143,22 @@ export default class QuoteDeckSwiper extends React.Component {
                   </Body>
                 </Left>
                 <Right>
-                  <Button transparent primary onPress={() => this._deckSwiper._root.swipeRight()}>
-                    <Text style={{
-                      paddingRight: 5
-                    }}>Siguiente</Text>
-                    <Icon name="ios-arrow-forward-outline"/>
-                  </Button>
+                  {
+                    this.state.showClose ?
+                    <Button transparent primary onPress={() => this.props.navigation.goBack()}>
+                      <Text style={{
+                        paddingRight: 5
+                      }}>Cerrar</Text>
+                      <Icon name="md-close"/>
+                    </Button>
+                    :
+                    <Button transparent primary onPress={() => this._deckSwiper._root.swipeRight()}>
+                      <Text style={{
+                        paddingRight: 5
+                      }}>Siguiente</Text>
+                      <Icon name="ios-arrow-forward-outline"/>
+                    </Button>
+                  }
                 </Right>
               </CardItem>
               <CardItem cardBody>

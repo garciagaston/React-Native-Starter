@@ -25,7 +25,6 @@ import Config from "../config";
 export default class Home extends React.Component {
 
   render() {
-
     return (
       <Container>
       <Tabs locked={true}>
@@ -37,7 +36,7 @@ export default class Home extends React.Component {
         </Tab>
         <Tab heading={ <TabHeading><Text>Listado</Text></TabHeading>}>
           <Content padder>
-            <QuoteList />
+            <QuoteList navigation={this.props.navigation} />
           </Content>
         </Tab>
       </Tabs>
